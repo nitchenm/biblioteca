@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.biblioteca.model.LibroModel;
 import com.example.biblioteca.repository.LibroRepository;
 import com.example.biblioteca.service.LibroService;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("api/v1/libros")
@@ -46,4 +48,33 @@ public class LibroController {
     public String eliminarLibro(@PathVariable int id){
         return libroService.eliminarLibro(id);
     }
+
+    @GetMapping("total")
+    public int getTotalLibros() {
+        return libroService.totalLibros();
+    }
+
+    @GetMapping("{isbn}")
+    public LibroModel obtenerLibroPorIsbn(@RequestParam String isbn) {
+        return libroService.obtenerLibroPorIsbn(isbn);
+    }
+
+    @GetMapping("{anio}")
+    public List<LibroModel> obtenerLibroPorAnio(@RequestParam int anio) {
+        return libroService.obtenerLibrosPorAnio(anio);
+    }
+
+    @GetMapping("{libroporautor}")
+    public List<LibroModel> getLibrosPorAutor(@RequestParam String libroporautor) {
+        return libroService.obtenerLibrosPorAutor(libroporautor);
+    }
+    
+    @GetMapping("LibroMasAntiguo")
+    public LibroModel obtenerLibroMasAntiguo() {
+        return libroService.obtenerLibroMasAntiguo();
+    }
+    
+    
+    
+    
 }
